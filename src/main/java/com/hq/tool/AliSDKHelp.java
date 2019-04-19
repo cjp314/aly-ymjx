@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -42,8 +41,7 @@ public class AliSDKHelp {
 
     private DescribeDomainRecordInfoResponse describeDomainRecordInfoResponse;
 
-    @Resource
-    private IpHelp ipHelp;
+
 
     /**
      * @Description 检查域名解析ip是否已经是外网的ip
@@ -53,7 +51,7 @@ public class AliSDKHelp {
      * @return
      */
     public boolean checkDomain(){
-        currentIp = ipHelp.getCurrentIp();
+
         if(currentIp == null){
             return  false;
         }
@@ -131,7 +129,7 @@ public class AliSDKHelp {
             if(domainRecords.size() == 1){
                 return domainRecords.get(0);
             }else {
-                log.error("域名:{0}只能有一条A解析记录，当前条数：{1}",DomainName,domainRecords.size());
+                log.error("域名:{}只能有一条A解析记录，当前条数：{}",DomainName,domainRecords.size());
                 return null;
             }
 
@@ -149,7 +147,9 @@ public class AliSDKHelp {
         return  client;
     }
 
-    public void updateDomain(){
+    public void updateDomain(String ip){
+
+        currentIp = ip;
         if (checkDomain()) {
 
             UpdateDomainRecordRequest request = new UpdateDomainRecordRequest();
@@ -162,7 +162,7 @@ public class AliSDKHelp {
             IAcsClient client = getClient();
             try {
                 UpdateDomainRecordResponse response = client.getAcsResponse(request);
-                log.info("修改解析id为{0}记录成功，新的映射ip：{1}",response.getRecordId(),currentIp);
+                log.info("修改解析id为{}记录成功，新的映射ip：{}",response.getRecordId(),currentIp);
             } catch (ServerException e) {
                 log.error("修改解析记录异常",e);
             } catch (ClientException e) {
@@ -170,6 +170,10 @@ public class AliSDKHelp {
             }
         }
     }
+
+
+
+
 
 
 

@@ -14,9 +14,19 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     @Resource
     private AliSDKHelp aliSDKHelp;
 
+    @Resource
+    private IpHelp ipHelp;
+
+    @Resource
+    private TPUDPNetSyslogServer tpudpNetSyslogServer;
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.info("程序启动，更新。。。。");
-        aliSDKHelp.updateDomain();
+        String ip = ipHelp.getCurrentIp();
+        aliSDKHelp.updateDomain(ip);
+        tpudpNetSyslogServer.run();
     }
+
+
+
 }

@@ -61,6 +61,11 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.syslog4j</groupId>
+            <artifactId>syslog4j</artifactId>
+            <version>0.9.30</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -70,6 +75,15 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>*.yml</exclude>
+                </excludes>
+            </resource>
+        </resources>
     </build>
 
 </project>
