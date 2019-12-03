@@ -1,11 +1,7 @@
 query.ip.url: https://10000.gd.cn/getClientIP.php
 
-region.id: cn-shenzhen
-
-access.key.id: xxxxxx
-
-secret: xxxxxxxx
-
-
-domain.name: xxxxx
+aly:
+  params:
+    - {id: cn-shenzhen, key: xxx1, secret: xxxx1,domain: www.baidu.cn }
+    - {id: cn-shenzhen, key: xxx2, secret: xxxxx2,domain: www.baidu.fun}
 

@@ -17,14 +17,14 @@ import javax.annotation.Resource;
 @Slf4j
 public class ApplicationRunnerImpl implements ApplicationRunner {
 
-    @Resource
-    private AliSDKHelp aliSDKHelp;
+
 
 
     @Resource
     private IpHelp ipHelp;
 
-
+    @Resource
+    private UpdateDomainIp updateDomain;
 
     @Resource
     private  TPUDPNettyLogServer tpudpNettyLogServer;
@@ -32,7 +32,7 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         log.info("程序启动，更新。。。。");
         String ip = ipHelp.getCurrentIp();
-        aliSDKHelp.updateDomain(ip);
+        updateDomain.updateDomain(ip);
 
 
         EventLoopGroup group = new NioEventLoopGroup();

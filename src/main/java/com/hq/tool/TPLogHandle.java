@@ -13,7 +13,7 @@ public class TPLogHandle {
     private  static  final  String IP_SPLIT_FLAG = ",";
 
     @Resource
-    private AliSDKHelp aliSDKHelp;
+    private UpdateDomainIp updateDomain;
 
     public  void handleLog(String tpLog){
 
@@ -24,7 +24,7 @@ public class TPLogHandle {
                 log.info("日志中包含关键字:{}",IPCP_FLAG);
                 String ip =analysisIp(ipcpIndex,tpLog);
                 log.info("分析日志检测到ip发生变化，新ip{}，开始重新解析域名。。。",ip);
-                aliSDKHelp.updateDomain(ip);
+                updateDomain.updateDomain(ip);
             }
 
 

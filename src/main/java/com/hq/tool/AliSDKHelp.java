@@ -7,8 +7,6 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.profile.DefaultProfile;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -19,20 +17,21 @@ import java.util.List;
  * @Since 1.0
  * @Date 2019/04/16
  */
-@Component
 @Slf4j
 public class AliSDKHelp {
+    public AliSDKHelp(AlyParams alyParams){
+        this.DomainName = alyParams.getDomain();
+        this.regionId = alyParams.getId();
+        this.accessKeyId = alyParams.getKey();
+        this.secret = alyParams.getSecret();
+    }
 
-    @Value("${domain.name}")
     private String DomainName;
 
-    @Value("${region.id}")
     private String regionId;
 
-    @Value("${access.key.id}")
     private String accessKeyId;
 
-    @Value("${secret}")
     private  String secret;
 
     private String currentRecordId;
